@@ -73,7 +73,7 @@ namespace JHa.MP4
                 }
             }
         }
-        public override string ToString() => $"{Type} @{Stream.StartPosition}:{Stream.Length}:{UserType}";
+        public override string ToString() => $"{Type}<{GetType().Name}> @{Stream.StartPosition}:{Stream.Length}({(Stream.StartPosition+Stream.Length-1)}):{UserType}";
         public static Box CreateBox(Stream stream, long startIndex)
         {
             var position = stream.Position;

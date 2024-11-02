@@ -9,8 +9,16 @@ namespace JHa
         public long StartPosition;
         public SubStream(Stream baseStream, long startPosition, long length)
         {
-            BaseStream = baseStream;
-            StartPosition = startPosition;
+            if (baseStream is SubStream subStream)
+            {
+                BaseStream = subStream.BaseStream;
+                StartPosition = subStream.StartPosition + startPosition;
+            }
+            else
+            {
+                BaseStream = baseStream;
+                StartPosition = startPosition;
+            }
             this.length = length;
         }
         public SubStream(Stream baseStream, long startPosition) : this(baseStream, startPosition, baseStream.Length - startPosition)
