@@ -4,7 +4,7 @@ namespace JHa.MP4
 {
     public class BoxMDIA : BoxNested
     {
-        public BoxMDIA(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxMDIA(SubStream stream) : base(stream)
         {
             HDLR = FindBox<BoxHDLR>("hdlr");
             MINF = FindBox<BoxMINF>("minf");

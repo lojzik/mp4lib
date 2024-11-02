@@ -10,7 +10,7 @@ namespace JHa.MP4
         public UInt64 ModificationTime { get; private set; }
         public UInt32 TrackId { get; private set; }
         public UInt64 Duration { get; private set; }
-        public BoxTKHD(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxTKHD(SubStream stream) : base(stream)
         {
         }
         protected override void ReadData()

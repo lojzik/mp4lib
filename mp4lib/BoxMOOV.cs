@@ -5,7 +5,7 @@ namespace JHa.MP4
 {
     public class BoxMOOV : BoxNested
     {
-        public BoxMOOV(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxMOOV(SubStream stream) : base(stream)
         {
             TRAKS = FindBoxMulti<BoxTRAK>("trak");
         }

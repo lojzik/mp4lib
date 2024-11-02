@@ -4,7 +4,7 @@ namespace JHa.MP4
 {
     public class BoxMINF : BoxNested
     {
-        public BoxMINF(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxMINF(SubStream stream) : base(stream)
         {
             STBL = FindBox<BoxSTBL>("stbl");
         }

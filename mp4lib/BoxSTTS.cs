@@ -11,7 +11,7 @@ namespace JHa.MP4
             public UInt32 Count { get; set; }
             public UInt32 Delta { get; set; }
         }
-        public BoxSTTS(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxSTTS(SubStream stream) : base(stream)
         {
         }
 

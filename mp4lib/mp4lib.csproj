@@ -1,16 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <PackageId>JHa.mp4lib</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>JHa</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageTags>mp4</PackageTags>    
+    <PackageTags>mp4</PackageTags>
     <Description>Simple mp4 parser</Description>
     <PackageProjectUrl>https://github.com/lojzik/mp4lib</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lojzik/mp4lib</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>    
+    <RepositoryType>git</RepositoryType>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>    
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <RuntimeHostConfigurationOption Include="System.Globalization.Invariant" Value="true" />
+  </ItemGroup>
 </Project>

@@ -21,7 +21,7 @@ namespace JHa.MP4
             public override string ToString() => $"chunk index: {ChunkIndex}, index in chunk: {IndexInChunk}";
         }
 
-        public BoxSTBL(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxSTBL(SubStream stream) : base(stream)
         {
             STTS = FindBox<BoxSTTS>("stts");
             STSC = FindBox<BoxSTSC>("stsc");
@@ -35,8 +35,8 @@ namespace JHa.MP4
         public BoxSTSD STSD { get; }
         public BoxSTSZ STSZ { get; }
         public BoxSTCO STCO { get; }
-        public ChunkToSample[] ChunksToSamples { get; private set; }
-        public SampleEntry[] SampleEntries { get; private set; }
+        public ChunkToSample[] ChunksToSamples { get; private set; } = Array.Empty<ChunkToSample>();
+        public SampleEntry[] SampleEntries { get; private set; } = Array.Empty<SampleEntry>();
         public void ReadSample(UInt32 index, byte[] buffer, int offset)
         {
             var sampleEntry = SampleEntries[index];
@@ -46,9 +46,24 @@ namespace JHa.MP4
                 seekInChunk += STSZ.SampleSize(index - i - 1);
             }
             uint dataIndex = STCO.Items[sampleEntry.ChunkIndex] + seekInChunk;
-            Stream.Position = dataIndex;
-            Stream.Read(buffer, offset, (int)STSZ.SampleSize(index));
+            var rootStream = Stream.RootStream();
+            rootStream.Position = dataIndex;
+            rootStream.Read(buffer, offset, (int)STSZ.SampleSize(index));
         }
+        public void ReadSample(UInt32 index, Span<byte> buffer)
+        {
+            var sampleEntry = SampleEntries[index];
+            UInt32 seekInChunk = 0;
+            for (uint i = 0; i < sampleEntry.IndexInChunk; i++)
+            {
+                seekInChunk += STSZ.SampleSize(index - i - 1);
+            }
+            uint dataIndex = STCO.Items[sampleEntry.ChunkIndex] + seekInChunk;
+            var rootStream = Stream.RootStream();
+            rootStream.Position = dataIndex;
+            rootStream.Read(buffer);
+        }
+
         private void RestoreTables()
         {
             uint lastRealChunkNumber = STCO.EntryCount + 1;

@@ -6,12 +6,12 @@ namespace JHa.MP4
 {
     public class BoxSTSZ : FullBox
     {
-        public BoxSTSZ(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxSTSZ(SubStream stream) : base(stream)
         {
         }
         private UInt32 _SampleSize { get; set; }
         public UInt32 SampleCount { get; private set; }
-        private UInt32[] EntrySizeTable { get; set; }
+        private UInt32[] EntrySizeTable { get; set; } = Array.Empty<UInt32>();
         public UInt32 TotalSize { get; private set; }
         protected override void ReadData()
         {

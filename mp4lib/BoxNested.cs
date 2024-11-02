@@ -8,7 +8,7 @@ namespace JHa.MP4
     {
         public List<Box> Nested { get; } = new List<Box>();
 
-        public BoxNested(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxNested(SubStream stream) : base(stream)
         {
         }
         protected override void ReadData()
@@ -21,7 +21,7 @@ namespace JHa.MP4
                 Nested.Add(box);
                 currentPosition += box.Size;
 
-            } while (currentPosition < StartIndex + Size);
+            } while (currentPosition < Size);
         }
         protected T FindBox<T>(string type) where T : Box => Nested.Where(x => x.Type == type).Cast<T>().SingleOrDefault();
         protected List<T> FindBoxMulti<T>(string type) where T : Box => Nested.Where(x => x.Type == type).Cast<T>().ToList();

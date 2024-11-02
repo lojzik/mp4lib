@@ -8,29 +8,28 @@ namespace mp4cmd
 {
     class Program
     {
-
         static void Main(string[] args)
         {
+            string filename = String.Empty;
             if (args.Length == 0)
             {
-                Console.WriteLine("file.mp4 [-e] [-s]");
+                Console.WriteLine("parametry: file.mp4 [-e] [-s]");
                 return;
             }
-            var filename = args[0];
-            using (var mp4file = MP4File.Parse(filename))
+            else
             {
-                if (args.Contains("-s"))
-                    Display(mp4file.Nested, "");
-                if (args.Contains("-e"))
+                filename = args[0];
+            }
+            using var mp4file = MP4File.Parse(filename);
+            if (args.Contains("-s"))
+                Display(mp4file.Nested, "");
+            if (args.Contains("-e"))
+            {
+                foreach (var trak in mp4file.MOOV.TRAKS)
                 {
-                    foreach (var trak in mp4file.MOOV.TRAKS)
-                    {
-                        var trackname = filename + $".track.{trak.TrackId}.bin";
-                        using (var filewrite = File.OpenWrite(trackname))
-                        {
-                            trak.WriteAllTo(filewrite);
-                        }
-                    }
+                    var trackname = filename + $".track.{trak.TrackId}.bin";
+                    using var filewrite = File.OpenWrite(trackname);
+                    trak.WriteAllTo(filewrite);
                 }
             }
         }

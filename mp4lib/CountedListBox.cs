@@ -6,11 +6,11 @@ namespace JHa.MP4
 {
     public abstract class CountedListBox<T> : FullBox
     {
-        public CountedListBox(Stream stream, long startIndex) : base(stream, startIndex)
+        public CountedListBox(SubStream stream) : base(stream)
         {
         }
         public UInt32 EntryCount { get; protected set; }
-        public T[] Items { get; protected set; }
+        public T[] Items { get; protected set; } = Array.Empty<T>();
         protected override void ReadData()
         {
             base.ReadData();

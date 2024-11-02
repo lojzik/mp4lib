@@ -4,7 +4,7 @@ namespace JHa.MP4
 {
     public class FullBox : Box
     {
-        public FullBox(Stream stream, long startIndex) : base(stream, startIndex)
+        public FullBox(SubStream stream) : base(stream)
         {
         }
         public byte Version { get; private set; }

@@ -12,7 +12,7 @@ namespace JHa.MP4
             public UInt32 SamplesPerChunk { get; set; }
             public UInt32 SampleDescriptionIndex { get; set; }
         }
-        public BoxSTSC(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxSTSC(SubStream stream) : base(stream)
         {
         }
         protected override Sample ReadItem()

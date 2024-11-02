@@ -14,7 +14,7 @@ namespace JHa.MP4
             public Int16 MediaRateInteger { get; set; }
             public Int16 MediaRateFraction { get; set; }
         }
-        public BoxELST(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxELST(SubStream stream) : base(stream)
         {
         }
         protected override Sample ReadItem()

@@ -8,16 +8,16 @@ namespace JHa.MP4
     {
         public class SampleEntry : Box
         {
-            public SampleEntry(Stream stream, long startIndex) : base(stream, startIndex)
+            public SampleEntry(SubStream stream) : base(stream)
             {
             }
         }
-        public BoxSTSD(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxSTSD(SubStream stream) : base(stream)
         {
         }
         protected override SampleEntry ReadItem()
         {
-            return new SampleEntry(Stream,Stream.Position)
+            return new SampleEntry(Stream)
             {
             };
         }

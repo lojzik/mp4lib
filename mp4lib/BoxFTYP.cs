@@ -7,20 +7,24 @@ namespace JHa.MP4
 {
     public class BoxFTYP : Box
     {
-        public string MajorBrand { get; private set; }
+//        public string MajorBrand { get; private set; } = "XXXX";
+        public String4 MajorBrand;
         public UInt32 MinorVersion { get; private set; }
-        public List<string> CompatibleBrands { get; } = new List<string>();
-        public BoxFTYP(Stream stream, long startIndex) : base(stream, startIndex)
+        public List<String4> CompatibleBrands { get; } = new List<String4>();
+        public BoxFTYP(SubStream stream) : base(stream)
         {
         }
         protected override void ReadData()
         {
             base.ReadData();
-            MajorBrand = ReadString4();
+            Read(ref MajorBrand);// = ReadString4();
             MinorVersion = ReadUInt32();
-            while (Stream.Position < StartIndex + Size)
+            while (Stream.Position < Stream.Length)
             {
-                CompatibleBrands.Add(ReadString4().Trim());
+                String4 string4 = new String4();
+                Read(ref string4);
+                CompatibleBrands.Add(string4);
+//                CompatibleBrands.Add(ReadString4().Trim());
             }
         }
         public override string ToString() => $"{base.ToString()}: {MajorBrand}, {MinorVersion}, {string.Join(", ",CompatibleBrands)}";

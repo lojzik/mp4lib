@@ -6,11 +6,11 @@ namespace JHa.MP4
 {
     public class BoxHMMT : Box
     {
-        public BoxHMMT(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxHMMT(SubStream stream) : base(stream)
         {
         }
         public UInt32 EntryCount { get; private set; }
-        public UInt32[] HighlightsTable { get; private set; }
+        public UInt32[] HighlightsTable { get; private set; } = Array.Empty<UInt32>();
         protected override void ReadData()
         {
             base.ReadData();

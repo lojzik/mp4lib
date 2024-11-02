@@ -6,7 +6,7 @@ namespace JHa.MP4
 {
     public class BoxSTCO : CountedListBox<UInt32>
     {
-        public BoxSTCO(Stream stream, long startIndex) : base(stream, startIndex)
+        public BoxSTCO(SubStream stream) : base(stream)
         {
         }
         protected override uint ReadItem() => ReadUInt32();
