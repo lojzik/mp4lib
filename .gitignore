@@ -2,3 +2,6 @@ bin
 obj
 /.vscode
 TestResults
+.vs
+/mp4cmd/Properties/launchSettings.json
+/mp4cmd/*.user

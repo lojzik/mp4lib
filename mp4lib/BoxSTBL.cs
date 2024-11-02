@@ -28,6 +28,7 @@ namespace JHa.MP4
             STSD = FindBox<BoxSTSD>("stsd");
             STSZ = FindBox<BoxSTSZ>("stsz");
             STCO = FindBox<BoxSTCO>("stco");
+            CO64 = FindBox<BoxCO64>("co64");
             RestoreTables();
         }
         public BoxSTTS STTS { get; }
@@ -35,6 +36,7 @@ namespace JHa.MP4
         public BoxSTSD STSD { get; }
         public BoxSTSZ STSZ { get; }
         public BoxSTCO STCO { get; }
+        public BoxCO64 CO64 { get; }
         public ChunkToSample[] ChunksToSamples { get; private set; } = Array.Empty<ChunkToSample>();
         public SampleEntry[] SampleEntries { get; private set; } = Array.Empty<SampleEntry>();
         public void ReadSample(UInt32 index, byte[] buffer, int offset)
@@ -45,9 +47,9 @@ namespace JHa.MP4
             {
                 seekInChunk += STSZ.SampleSize(index - i - 1);
             }
-            uint dataIndex = STCO.Items[sampleEntry.ChunkIndex] + seekInChunk;
+            ulong dataIndex =  dataIndex = CoDataIndex(sampleEntry.ChunkIndex) + seekInChunk;
             var rootStream = Stream.RootStream();
-            rootStream.Position = dataIndex;
+            rootStream.Position = (long)dataIndex;
             rootStream.Read(buffer, offset, (int)STSZ.SampleSize(index));
         }
         public void ReadSample(UInt32 index, Span<byte> buffer)
@@ -58,16 +60,24 @@ namespace JHa.MP4
             {
                 seekInChunk += STSZ.SampleSize(index - i - 1);
             }
-            uint dataIndex = STCO.Items[sampleEntry.ChunkIndex] + seekInChunk;
+            ulong dataIndex = dataIndex = CoDataIndex(sampleEntry.ChunkIndex) + seekInChunk;
             var rootStream = Stream.RootStream();
-            rootStream.Position = dataIndex;
+            rootStream.Position = (long)dataIndex;
             rootStream.Read(buffer);
         }
 
+        private uint CoEntryCount()
+        {
+            return STCO?.EntryCount ?? CO64?.EntryCount ?? throw new InvalidOperationException("STCO/CO64 not exists");
+        }
+        private ulong CoDataIndex(uint index)
+        {
+            return STCO?.Items[index] ?? CO64?.Items[index] ?? throw new InvalidOperationException("STCO/CO64 not exists");
+        }
         private void RestoreTables()
         {
-            uint lastRealChunkNumber = STCO.EntryCount + 1;
-            ChunksToSamples = new ChunkToSample[STCO.EntryCount];
+            uint lastRealChunkNumber = CoEntryCount() + 1;
+            ChunksToSamples = new ChunkToSample[CoEntryCount()];
             var items = STSC.Items;
             for (int i = items.Length - 1; i >= 0; i--)
             {

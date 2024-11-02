@@ -109,6 +109,7 @@ namespace JHa.MP4
                     case "stsd": return new BoxSTSD(substream);
                     case "elst": return new BoxELST(substream);
                     case "HMMT": return new BoxHMMT(substream);
+                    case "co64":return new BoxCO64(substream);
                     default: return new Box(substream);
                 }
             }
