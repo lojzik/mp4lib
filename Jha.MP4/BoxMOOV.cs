@@ -1,0 +1,16 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Jha.MP4;
+
+public class BoxMOOV : BoxNested
+{
+    public BoxMOOV(SubStream stream) : base(stream)
+    {
+        TRAKS = [.. FindBoxMulti<BoxTRAK>(BoxName.trak)];
+        UDTA = FindBox<BoxNested>(BoxName.udta);
+    }
+    public IList<BoxTRAK> TRAKS { get; }
+    public BoxNested? UDTA { get; }
+}

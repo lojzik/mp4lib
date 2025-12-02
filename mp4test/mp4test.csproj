@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <IsPackable>false</IsPackable>
+		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+		<LangVersion>14.0</LangVersion>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +15,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\mp4lib\mp4lib.csproj" />
+    <ProjectReference Include="..\Jha.MP4\Jha.MP4.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="Mpeg4.mp4" CopyToOutputDirectory="PreserveNewest" />

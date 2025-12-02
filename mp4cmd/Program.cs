@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using JHa.MP4;
+using Jha.MP4;
 
 namespace mp4cmd
 {
@@ -10,7 +10,7 @@ namespace mp4cmd
     {
         static void Main(string[] args)
         {
-            string filename = String.Empty;
+            string filename;
             if (args.Length == 0)
             {
                 Console.WriteLine("parametry: file.mp4 [-e] [-s]");
@@ -29,7 +29,7 @@ namespace mp4cmd
                 {
                     var trackname = filename + $".track.{trak.TrackId}.bin";
                     using var filewrite = File.OpenWrite(trackname);
-                    trak.WriteAllTo(filewrite);
+                    trak.Write(filewrite);
                 }
             }
         }
