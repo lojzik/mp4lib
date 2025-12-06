@@ -5,6 +5,7 @@ using Jha.Common;
 
 namespace Jha.MP4;
 
+[Box("stbl")]
 public class BoxSTBL : BoxNested
 {
     public struct ChunkToSample
@@ -24,10 +25,10 @@ public class BoxSTBL : BoxNested
 
     public BoxSTBL(SubStream stream) : base(stream)
     {
-        STTS = FindBox<BoxSTTS>(BoxName.stts) ?? throw new BoxNotFoundException("stts");
-        STSC = FindBox<BoxSTSC>(BoxName.stsc) ?? throw new BoxNotFoundException("stsc");
-        STSD = FindBox<BoxSTSD>(BoxName.stsd) ?? throw new BoxNotFoundException("stsd");
-        STSZ = FindBox<BoxSTSZ>(BoxName.stsz) ?? throw new BoxNotFoundException("stsz");
+        STTS = FindMandatoryBox<BoxSTTS>(BoxName.stts);
+        STSC = FindMandatoryBox<BoxSTSC>(BoxName.stsc);
+        STSD = FindMandatoryBox<BoxSTSD>(BoxName.stsd);
+        STSZ = FindMandatoryBox<BoxSTSZ>(BoxName.stsz);
         STCO = FindBox<BoxSTCO>(BoxName.stco);
         CO64 = FindBox<BoxCO64>(BoxName.co64);
         if(STCO == null && CO64 == null)

@@ -5,9 +5,10 @@ using System.IO;
 
 namespace Jha.MP4;
 
+[Box("elst")]
 public class BoxELST(SubStream stream) : CountedListBox<BoxELST.Sample>(stream)
 {
-    public class Sample
+    public struct Sample
     {
         public UInt64 SegmentDuration { get; set; }
         public Int64 MediaTime { get; set; }

@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Jha.MP4;
 
-public abstract class CountedListBox<T>(SubStream stream) : FullBox(stream)
+public abstract class CountedListBox<T>(SubStream stream) : FullBox<UnknownFlags>(stream)
 {
     public UInt32 EntryCount { get; protected set; }
     public T[] Items { get; protected set; } = [];

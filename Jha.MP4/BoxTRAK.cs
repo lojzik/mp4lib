@@ -6,10 +6,11 @@ using System.Runtime.InteropServices;
 
 namespace Jha.MP4;
 
+[Box("trak")]
 public class BoxTRAK(SubStream stream) : BoxNested(stream)
 {
-    public BoxMDIA MDIA => FindBox<BoxMDIA>(BoxName.mdia) ?? throw new BoxNotFoundException("mdia");
-    public BoxTKHD TKHD => FindBox<BoxTKHD>(BoxName.tkhd) ?? throw new BoxNotFoundException("tkhd");
+    public BoxMDIA MDIA => FindMandatoryBox<BoxMDIA>(BoxName.mdia);
+    public BoxTKHD TKHD => FindMandatoryBox<BoxTKHD>(BoxName.tkhd);
     public string StreamName => MDIA.HDLR.ComponentName;
     public UInt32 TrackId => TKHD.TrackId;
     public override string ToString() => $"{base.ToString()}: {TrackId} {StreamName}";

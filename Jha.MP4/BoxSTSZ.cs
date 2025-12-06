@@ -4,7 +4,8 @@ using System.IO;
 
 namespace Jha.MP4;
 
-public class BoxSTSZ(SubStream stream) : FullBox(stream)
+[Box("stsz")]
+public class BoxSTSZ(SubStream stream) : FullBox<UnknownFlags>(stream)
 {
     private UInt32 _SampleSize { get; set; }
     public UInt32 SampleCount { get; private set; }

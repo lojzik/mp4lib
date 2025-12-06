@@ -6,7 +6,8 @@ using System.Text;
 
 namespace Jha.MP4;
 
-public class BoxHDLR(SubStream stream) : FullBox(stream)
+[Box("hdlr")]
+public class BoxHDLR(SubStream stream) : FullBox<UnknownFlags>(stream)
 {
     public String4 componentType;
     public String4 componentSubtype;
@@ -24,6 +25,7 @@ public class BoxHDLR(SubStream stream) : FullBox(stream)
         int length = (int)Stream.Length - 20;
         Span<byte> buff = stackalloc byte[length];
         Stream.ReadExactly(buff);
+        //todo: check in doc
         int start = 0;
         while (buff[start] <= 32 && start < length)
             start++;

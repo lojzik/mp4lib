@@ -5,6 +5,7 @@ using System.IO;
 
 namespace Jha.MP4;
 
+[Box("stss")]
 public class BoxSTSS(SubStream stream) : CountedListBox<UInt32>(stream)
 {
     protected override uint ReadItem() => ReadUInt32();

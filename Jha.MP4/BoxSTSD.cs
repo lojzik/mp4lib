@@ -4,6 +4,7 @@ using System.IO;
 
 namespace Jha.MP4;
 
+[Box("stsd")]
 public class BoxSTSD(SubStream stream) : CountedListBox<BoxSTSD.SampleEntry>(stream)
 {
     public class SampleEntry(SubStream stream) : Box(stream)

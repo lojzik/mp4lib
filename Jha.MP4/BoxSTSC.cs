@@ -5,9 +5,10 @@ using System.IO;
 
 namespace Jha.MP4;
 
+[Box("stsc")]
 public class BoxSTSC(SubStream stream) : CountedListBox<BoxSTSC.Sample>(stream)
 {
-    public class Sample
+    public struct Sample
     {
         public UInt32 FirstChunk { get; set; }
         public UInt32 SamplesPerChunk { get; set; }

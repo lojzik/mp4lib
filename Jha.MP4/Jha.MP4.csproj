@@ -13,11 +13,11 @@
     <PackageProjectUrl>https://github.com/lojzik/mp4lib</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lojzik/mp4lib</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+<!--    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>-->
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Jha.Common" Version="1.0.0-alpha.1" />
+    <PackageReference Include="Jha.Common" Version="1.0.0-alpha.3" />
   </ItemGroup>
 
   <ItemGroup>

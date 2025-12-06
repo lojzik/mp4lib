@@ -31,7 +31,11 @@ public static class BoxName
     public static readonly String4 elst = "elst";
     public static readonly String4 HMMT = "HMMT";
     public static readonly String4 udta = "udta";
-    public  static readonly String4 free = "free";
+    public static readonly String4 free = "free";
+    public static readonly String4 trun = "trun";
+    public static readonly String4 moof = "moof";
+    public static readonly String4 traf = "traf";
+    public static readonly String4 mfhd = "mfhd";
 
 
 }

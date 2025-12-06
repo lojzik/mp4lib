@@ -5,6 +5,7 @@ using System.IO;
 
 namespace Jha.MP4;
 
+[Box("hmmt")]
 public class BoxHMMT(SubStream stream) : Box(stream)
 {
     public UInt32 EntryCount { get; private set; }

@@ -4,9 +4,10 @@ using System.IO;
 
 namespace Jha.MP4;
 
+[Box("stts")]
 public class BoxSTTS(SubStream stream) : CountedListBox<BoxSTTS.Sample>(stream)
 {
-    public record Sample
+    public struct Sample
     {
         public UInt32 Count { get; set; }
         public UInt32 Delta { get; set; }

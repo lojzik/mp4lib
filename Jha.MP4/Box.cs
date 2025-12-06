@@ -1,11 +1,13 @@
 
 using Jha.Common;
 using System;
+using System.Drawing;
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Xml.Schema;
 
 namespace Jha.MP4;
 
@@ -61,12 +63,31 @@ public class Box
         var result = converter(buff);
         return result;
     }
+    protected T[] ReadArray<T>(Converter<T> converter, int count) where T : struct
+    {
+        T[] result = new T[count];
+        for (int i = 0; i < count; i++)
+        {
+            result[i] = Read(converter);
+        }
+        return result;
+    }
     protected UInt32 ReadUInt32() => Read(BitConverter.ToUInt32);
     protected Int32 ReadInt32() => Read(BitConverter.ToInt32);
     protected Int16 ReadInt16() => Read(BitConverter.ToInt16);
     protected UInt64 ReadUInt64() => Read(BitConverter.ToUInt64);
     protected Int64 ReadInt64() => Read(BitConverter.ToInt64);
-    //        protected string ReadString4() => ReadString(4);
+    protected UInt32[] ReadUInt32Array(int count) => ReadArray(BitConverter.ToUInt32, count);
+    protected Int32[] ReadInt32Array(int count) => ReadArray(BitConverter.ToInt32, count);
+
+    protected String4 ReadString4()
+    {
+        Span<byte> buffer = stackalloc byte[4];
+        Stream.ReadExactly(buffer);
+        String4 str = new String4();
+        str.From(buffer);
+        return str;
+    }
     protected string ReadString(int size)
     {
         Span<byte> buff = stackalloc byte[size];
@@ -75,56 +96,10 @@ public class Box
     }
     protected void Read(ref String4 str)
     {
-        unsafe
-        {
-            fixed (byte* p = str.ByteBuffer)
-            {
-                var span = new Span<byte>(p, 4);
-                Stream.ReadExactly(span);
-            }
-        }
+        Span<byte> buffer = stackalloc byte[4];
+        Stream.ReadExactly(buffer);
+        str.From(buffer);
     }
     public override string ToString() => $"{Type}<{GetType().Name}> @{Stream.StartPosition}:{Stream.Length}({(Stream.StartPosition + Stream.Length - 1)}):{UserType}";
-    public static Box CreateBox(Stream stream, long startIndex)
-    {
-        var position = stream.Position;
-        try
-        {
-            stream.Position = startIndex + 4;
-            String4 xtype;
-            xtype.Token = 0;
-            unsafe
-            {
-                var x = new Span<byte>(xtype.ByteBuffer, 4);
-                stream.ReadExactly(x);
-            }
-            var substream = new SubStream(stream, startIndex);
-            return xtype.AsString switch
-            {
-                "edts" or "udta" or "dinf" => new BoxNested(substream),
-                "moov" => new BoxMOOV(substream),
-                "trak" => new BoxTRAK(substream),
-                "mdia" => new BoxMDIA(substream),
-                "minf" => new BoxMINF(substream),
-                "stbl" => new BoxSTBL(substream),
-                "hdlr" => new BoxHDLR(substream),
-                "ftyp" => new BoxFTYP(substream),
-                "tkhd" => new BoxTKHD(substream),
-                "stts" => new BoxSTTS(substream),
-                "stsz" => new BoxSTSZ(substream),
-                "stco" => new BoxSTCO(substream),
-                "stss" => new BoxSTSS(substream),
-                "stsc" => new BoxSTSC(substream),
-                "stsd" => new BoxSTSD(substream),
-                "elst" => new BoxELST(substream),
-                "HMMT" => new BoxHMMT(substream),
-                "co64" => new BoxCO64(substream),
-                _ => new Box(substream),
-            };
-        }
-        finally
-        {
-            stream.Position = position;
-        }
-    }
+
 }

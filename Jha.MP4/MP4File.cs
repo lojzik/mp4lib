@@ -16,15 +16,17 @@ public class MP4File : IDisposable
         Stream = stream;
         do
         {
-            var box = Box.CreateBox(stream, startIndex);
+            var box = BoxFactory.Instance.CreateBox(stream, startIndex);
             startIndex += box.Size;
             Nested.Add(box);
         } while (startIndex < stream.Length);
         FTYP = Nested.Where(x => x.Type.Equals(BoxName.ftyp)).Cast<BoxFTYP>().Single();
         MOOV = Nested.Where(x => x.Type.Equals(BoxName.moov)).Cast<BoxMOOV>().Single();
+        MOOFs = Nested.Where(x => x.Type.Equals(BoxName.moof)).Cast<BoxMOOF>().ToList();
     }
     public BoxFTYP FTYP { get; }
     public BoxMOOV MOOV { get; }
+    public IList<BoxMOOF> MOOFs { get; }
     public static MP4File Parse(Stream stream)
     {
         return new MP4File(stream);

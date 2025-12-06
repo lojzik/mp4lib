@@ -6,6 +6,7 @@ using System.IO;
 
 namespace Jha.MP4;
 
+[Box("ftyp")]
 public class BoxFTYP(SubStream stream) : Box(stream)
 {
     private String4 majorBrand;

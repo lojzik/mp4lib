@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Jha.MP4;
 
+[Box("moov")]
 public class BoxMOOV : BoxNested
 {
     public BoxMOOV(SubStream stream) : base(stream)
