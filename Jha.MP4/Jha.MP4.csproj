@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
 		<LangVersion>14.0</LangVersion>
     <PackageId>Jha.MP4</PackageId>
-    <Version>1.0.0-alpha.1</Version>
+    <Version>1.0.0-alpha.2</Version>
     <Authors>JHa</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageTags>mp4</PackageTags>
@@ -16,8 +16,12 @@
 <!--    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>-->
   </PropertyGroup>
 
+	<PropertyGroup>
+		<PackageOutputPath Condition="'$(VS_PACKAGEOUTPUTPATH)' != ''">$(VS_PACKAGEOUTPUTPATH)</PackageOutputPath>
+	</PropertyGroup>	
+
   <ItemGroup>
-    <PackageReference Include="Jha.Common" Version="1.0.0-alpha.3" />
+    <PackageReference Include="Jha.Common" Version="1.0.0-alpha.6" />
   </ItemGroup>
 
   <ItemGroup>
