@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
-using Jha.MP4;
+using JHa.MP4;
 using Xunit;
 using Xunit.Abstractions;
 

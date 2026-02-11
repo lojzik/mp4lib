@@ -1,4 +1,4 @@
-﻿using Jha.Common;
+﻿using JHa.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jha.MP4
+namespace JHa.MP4
 {
     public class BoxFactory
     {

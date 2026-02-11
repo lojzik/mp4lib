@@ -1,9 +1,9 @@
 
-using Jha.Common;
+using JHa.Common;
 using System;
 using System.IO;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 [Box("co64")]
 public class BoxCO64(SubStream stream) : CountedListBox<UInt64>(stream)

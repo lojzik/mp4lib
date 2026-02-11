@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Jha.MP4;
+using JHa.MP4;
 
 namespace mp4cmd
 {

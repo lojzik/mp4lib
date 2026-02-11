@@ -1,9 +1,9 @@
 
 using System;
 using System.IO;
-using Jha.Common;
+using JHa.Common;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 [Box("stbl")]
 public class BoxSTBL : BoxNested

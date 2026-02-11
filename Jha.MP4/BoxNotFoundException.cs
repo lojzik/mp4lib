@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 [Serializable]
 internal class BoxNotFoundException : Exception

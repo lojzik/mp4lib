@@ -1,8 +1,8 @@
-using Jha.Common;
+using JHa.Common;
 using System;
 using System.IO;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 [Box("stsd")]
 public class BoxSTSD(SubStream stream) : CountedListBox<BoxSTSD.SampleEntry>(stream)

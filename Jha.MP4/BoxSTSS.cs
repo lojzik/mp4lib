@@ -1,9 +1,9 @@
 
-using Jha.Common;
+using JHa.Common;
 using System;
 using System.IO;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 [Box("stss")]
 public class BoxSTSS(SubStream stream) : CountedListBox<UInt32>(stream)

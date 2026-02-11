@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 public class MP4File : IDisposable
 {

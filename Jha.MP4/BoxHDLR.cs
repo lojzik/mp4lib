@@ -1,10 +1,10 @@
-using Jha.Common;
+using JHa.Common;
 using System;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 [Box("hdlr")]
 public class BoxHDLR(SubStream stream) : FullBox<UnknownFlags>(stream)

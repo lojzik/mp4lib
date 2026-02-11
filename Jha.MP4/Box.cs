@@ -1,5 +1,5 @@
 
-using Jha.Common;
+using JHa.Common;
 using System;
 using System.Drawing;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Schema;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 public class Box 
 {

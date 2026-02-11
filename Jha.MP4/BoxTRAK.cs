@@ -1,10 +1,10 @@
-using Jha.Common;
+using JHa.Common;
 using System;
 using System.Buffers;
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace Jha.MP4;
+namespace JHa.MP4;
 
 [Box("trak")]
 public class BoxTRAK(SubStream stream) : BoxNested(stream)
