@@ -5,6 +5,6 @@
     <Platform Name="x86" />
   </Configurations>
   <Project Path="mp4cmd/mp4cmd.csproj" />
-  <Project Path="Jha.MP4\Jha.MP4.csproj" />
-  <Project Path="mp4test/mp4test.csproj" />
+  <Project Path="JHa.MP4\Jha.MP4.csproj" />
+  <Project Path="JHa.MP4.Test/mp4test.csproj" />
 </Solution>
