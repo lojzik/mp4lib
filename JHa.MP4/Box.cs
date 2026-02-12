@@ -3,7 +3,8 @@ using JHa.Common;
 using System;
 using System.Drawing;
 using System.IO;
-using System.Reflection.Metadata.Ecma335;
+//using System.Reflection.Metadata.Ecma335;
+
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -48,11 +49,19 @@ public class Box
         {
             Span<byte> buffer = stackalloc byte[16];
             Stream.ReadExactly(buffer);
+#if NETSTANDARD2_0
+            UserType = new Guid(buffer.ToArray());
+#else
             UserType = new Guid(buffer);
+#endif
         }
         ContentPosition = Stream.Position;
     }
+#if NETSTANDARD2_0
+    protected delegate T Converter<T>(byte[] args, int position);
+#else
     protected delegate T Converter<T>(ReadOnlySpan<byte> args);
+#endif
     protected T Read<T>(Converter<T> converter) where T : struct
     {
         var size = Unsafe.SizeOf<T>();
@@ -60,7 +69,11 @@ public class Box
         Stream.ReadExactly(buff);
         if (BitConverter.IsLittleEndian)
             buff.Reverse();
+#if NETSTANDARD2_0
+        var result = converter(buff.ToArray(),0);
+#else
         var result = converter(buff);
+#endif
         return result;
     }
     protected T[] ReadArray<T>(Converter<T> converter, int count) where T : struct
@@ -92,7 +105,12 @@ public class Box
     {
         Span<byte> buff = stackalloc byte[size];
         Stream.ReadExactly(buff);
+#if NETSTANDARD2_0
+        return Encoding.ASCII.GetString(buff.ToArray());
+#else
         return Encoding.ASCII.GetString(buff);
+#endif
+
     }
     protected void Read(ref String4 str)
     {

@@ -32,7 +32,11 @@ public class BoxHDLR(SubStream stream) : FullBox<UnknownFlags>(stream)
         length -= start;
         while (buff[start + length - 1] <= 32 && length > 0)
             length--;
+#if NETSTANDARD2_0
+        ComponentName = Encoding.ASCII.GetString(buff.ToArray(),start, length);
+#else
         ComponentName = Encoding.ASCII.GetString(buff.Slice(start, length));
+#endif
         //Stream.Read(buffer, 0, buffer.Length);
         //ComponentName = Encoding.ASCII.GetString(buffer.Where(x => x != 0).ToArray()).Trim();
     }
