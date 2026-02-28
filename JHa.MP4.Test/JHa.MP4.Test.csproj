@@ -26,5 +26,6 @@
     <None Update="Mpeg4.mp4" CopyToOutputDirectory="PreserveNewest" />
     <None Update="small.m4v" CopyToOutputDirectory="PreserveNewest" />
     <None Update="small.m4v.stream1" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="sample_mpeg4.mp4" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

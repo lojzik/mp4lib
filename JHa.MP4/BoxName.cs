@@ -36,6 +36,22 @@ public static class BoxName
     public static readonly String4 moof = "moof";
     public static readonly String4 traf = "traf";
     public static readonly String4 mfhd = "mfhd";
-
-
+    public static readonly String4 tfhd = "tfhd";
+    public static readonly String4 mvhd = "mvhd";
+    public static readonly String4 mdhd = "mdhd";
+    public static readonly String4 vmhd = "vmhd";
+    public static readonly String4 smhd = "smhd";
+    public static readonly String4 nmhd = "nmhd";
+    public static readonly String4 dref = "dref";
+    public static readonly String4 ctts = "ctts";
+    public static readonly String4 stss = "stss";
+    public static readonly String4 mvex = "mvex";
+    public static readonly String4 trex = "trex";
+    public static readonly String4 mehd = "mehd";
+    public static readonly String4 esds = "esds";
+    public static readonly String4 mp4a = "mp4a";
+    public static readonly String4 mp4v = "mp4v";
+    public static readonly String4 mp4s = "mp4s";
+    public static readonly String4 tref = "tref";
+    public static readonly String4 meta = "meta";
 }
